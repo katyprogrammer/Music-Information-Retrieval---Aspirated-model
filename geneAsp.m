@@ -12,9 +12,9 @@ function sig = geneAsp(pitch,dur,volumn)
     time = (0:N-1) / Fs;
 
     a = 100;
-    b = 1000;
-    range = Fs / 2;
-    sampnum = 10000;
+    b = 100;
+    range = 3000;
+    sampnum = 1000;
     exponential = 1;
     
     sig = zeros(1,N);
@@ -26,6 +26,6 @@ function sig = geneAsp(pitch,dur,volumn)
     end 
 
     sig = sig';
-    sig = sig .* hanning(length(sig));
+    sig = sig .* hanning(length(sig)) .* hanning(length(sig));
 %     p=audioplayer(sig, Fs); playblocking(p);
 end
