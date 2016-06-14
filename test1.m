@@ -49,9 +49,6 @@ for n = 1:num
    
     fftMag = 10*log10( abs(fft(sig,nfft)));
     [maxmag,fundfreq] = max(fftMag);
-    
-    
-    
     sigwhole(:,n) = sig;
     fftMagwhole(:,n) = fftMag(1:numUniq);
 end
@@ -66,4 +63,4 @@ for n = 1:num
     drawnow;
     p=audioplayer(sig .* hanning(length(sig)), Fs); playblocking(p);
 end
-% p=audioplayer(sigcon, Fs); playblocking(p);
+p=audioplayer(sigcon, Fs); playblocking(p);

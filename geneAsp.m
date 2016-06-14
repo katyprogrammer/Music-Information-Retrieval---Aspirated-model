@@ -1,6 +1,7 @@
 function sig = geneAsp(pitch,dur,volumn)
     
     Fs = 65536;                    %# sampling frequency in Hz
+    % Fs = 181120;
     dense = 1;
     % T = dur;                       %# length of one interval signal in sec
     % t = 0:1/Fs:T-1/Fs;             %# time vector
@@ -27,5 +28,8 @@ function sig = geneAsp(pitch,dur,volumn)
 
     sig = sig';
     sig = sig .* hanning(length(sig)) .* hanning(length(sig));
-%     p=audioplayer(sig, Fs); playblocking(p);
+    filename = 'geneAsp.wav';
+    audiowrite(filename,sig,Fs);  
+    size(audioread(filename))
+    p=audioplayer(sig, Fs); playblocking(p);
 end
