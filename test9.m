@@ -13,7 +13,7 @@ close all;clc;
 close all;clc;
 Fs = 65536;
 volumn = 100000;   
-notenum = 5;
+notenum = 5;  
 midiseq = [67,65,64,62,60];
 midiseq = midiseq(randperm(notenum))
 durseq = [0.3,0.3,0.3,0.3,0.3];
