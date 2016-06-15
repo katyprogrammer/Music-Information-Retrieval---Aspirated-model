@@ -21,11 +21,11 @@ spec_angle = angle(spec);
 x=linspace(0,fs/2,w/2+1);
 % thre = 20;
 % spec_abs(spec_abs>thre) = thre;
-epsilon = 0.01
+epsilon = 0.01;
 for i = 1:length(spec)
     meanValue = mean(spec_abs(:,i));
     deviation = std(spec_abs(:,i));
-    spec_abs(:,i) = spec_abs(:,i) - meanValue;
+    spec_abs(:,i) = spec_abs(:,i) - meanValue*2;
     spec_abs(spec_abs(:,i)>deviation,i) = 0;    
     findpeaks(spec_abs(:,i));
      axis([0,100,0,20]);
@@ -37,13 +37,7 @@ spec_ = complex(spec_abs.*cos(spec_angle), spec_abs.*sin(spec_angle));
 sig_ = istft(spec_, h, nfft, fs);
 filename = 'aspirated.wav';
 audiowrite(filename,sig_,fs);
-siz = wavread(filename,'size') % siz = [samples channels]
-disp('audio length')
-siz(1)/Fs % should give you the length in seconds
-aspirated = audioread(filename);
-size(aspirated)
 p = audioplayer(sig_, fs);
 playblocking(p);
 % geneAsp(440, 2.7637, 100);
 % SDR = bss_eval_sources(audioread(filename), audioread('geneAsp.wav'))
-

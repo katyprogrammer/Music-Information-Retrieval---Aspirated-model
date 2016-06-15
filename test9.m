@@ -21,6 +21,7 @@ durseq = [0.3,0.3,0.3,0.3,0.3];
 notenum = 24;
 
 midiseq = [67,64,64,65,62,62,60,62,64,65,67,67,67,67,64,64,65,62,62,60,64,67,67,60];
+midiseq = midiseq;
 durseq = [0.3,0.3,0.6,0.3,0.3,0.6,0.3,0.3,0.3,0.3,0.3,0.3,0.6,0.3,0.3,0.6,0.3,0.3,0.6,0.3,0.3,0.3,0.3,0.9];
 % notenum = 1;
 % midiseq = [60];
@@ -33,6 +34,8 @@ for i=1:notenum
 end
 
 p=audioplayer(sig, Fs); playblocking(p);
+audiowrite('bee.wav',sig,Fs);
+
 %%
 % close all;clear;clc;
 % Fs = 65536;
