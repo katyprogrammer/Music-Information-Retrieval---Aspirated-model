@@ -1,3 +1,4 @@
+%% make a spectrogram, and do inverse fourier transform to get the audio file
 function sig = geneAsp2(pitch,dur,volumn)
     Fs = 65536;
     N = round(dur * Fs);
