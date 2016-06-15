@@ -1,3 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%             extract aspirated model from source          %
+%             Music Information Final Project          %
+%                                                      %
+% Author: Katy Lee                         2016/06/15  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 addpath(genpath('..\MIRtoolbox1.6.1'));
 %% extracting aspirated model from audio pieces
 close all;clear;clc;
