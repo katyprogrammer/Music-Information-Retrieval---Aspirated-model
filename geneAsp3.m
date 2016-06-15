@@ -1,3 +1,4 @@
+%% under experiment 
 function sig = geneAsp2(pitch,dur,volumn,template)
     close all;clc;
     Fs = 65536;

@@ -1,3 +1,4 @@
+%% randomly put sin sinal on the range, using 1/(x^exp) to determine the amplitude 
 function sig = geneAsp(pitch,dur,volumn)
     
     Fs = 65536;                    %# sampling frequency in Hz
