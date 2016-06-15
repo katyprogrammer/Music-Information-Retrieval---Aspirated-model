@@ -17,19 +17,19 @@ function sig = geneAsp2(pitch,dur,volumn)
     [pitchval, pitchidx] = max(spec_abs);
     
     spec_abs = zeros(1,length(spec_abs));
+    %%spec_abs(pitchidx) = pitchval;
     a = 10;
     b = 100;
     d = 10;
-    e = 2;
+    m = 5;
+    e = 1;
     sampnum = length(spec)/d;
     for i = 1:sampnum
         p = round(rand * (length(spec)-1))+1;
         if pitchidx ~= p
-            spec_abs(p) = pitchval * b / ( ( abs ( x(p) - pitch ) ^ e ) * a + b );
-%             spec_abs(p) = pitchval / 1000;
+            spec_abs(p) = pitchval * b / ( ( abs ( x(p) - pitch ) ^ e ) * a + b )/m;
         end
     end
-    norm(spec_abs)
     spec_abs = volumn * spec_abs / norm(spec_abs);
     
     spec_ = complex(spec_abs.*cos(spec_angle), spec_abs.*sin(spec_angle));
