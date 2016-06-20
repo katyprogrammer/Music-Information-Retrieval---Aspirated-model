@@ -1,6 +1,6 @@
 %% make a spectrogram, and do inverse fourier transform to get the audio file
-function sig = geneAsp2(pitch,dur,volumn)
-    Fs = 65536;
+function sig = geneAsp4(Fs,pitch,dur,volumn)
+%     Fs = 65536;
     N = round(dur * Fs);
     time = (0:N-1) / Fs;
 
@@ -19,7 +19,7 @@ function sig = geneAsp2(pitch,dur,volumn)
     [pitchval, pitchidx] = max(spec_abs);
     
     spec_abs = zeros(1,length(spec_abs));
-    spec_abs(pitchidx) = pitchval;
+%     spec_abs(pitchidx) = pitchval;
     a = 10;
     b = 100;
     d = 10;
@@ -30,6 +30,7 @@ function sig = geneAsp2(pitch,dur,volumn)
         p = round(rand * (length(spec)-1))+1;
         if pitchidx ~= p
             spec_abs(p) = pitchval * b / ( ( abs ( x(p) - pitch ) ^ e ) * a + b )/m;
+            spec_abs(p) = pitchval;
         end
     end
     spec_abs = volumn * spec_abs / norm(spec_abs);
@@ -45,10 +46,14 @@ function sig = geneAsp2(pitch,dur,volumn)
 %         l = round(length(sig)/4)+1; r = round(length(sig)*3/4);
 %         sig = sig(l:r);
 %         sig = repmat(sig,1,dur*2);
-        sig = repmat(sig,1,dur);
+        sig_ = sig;
+        sig = [repmat(sig_,1,floor(dur))];
+        if (dur-floor(dur)>0)
+            sig = [sig sig_(1:Fs*(dur-floor(dur)))];
+        end
     end
-    sig = sig .* hanning(length(sig))';
+%     sig = sig .* hanning(length(sig))';
     
-    plot(x,spec_abs);
-    axis([0, 2000,0, pitchval]);
+%     plot(x,spec_abs);
+%     axis([0, 2000,0, pitchval]);
 end

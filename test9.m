@@ -12,7 +12,7 @@ close all;clc;
 %%
 close all;clc;
 Fs = 65536;
-volumn = 10000;   
+volumn = 100000;   
 notenum = 5;  
 
 midiseq = [67,65,64,62,60];

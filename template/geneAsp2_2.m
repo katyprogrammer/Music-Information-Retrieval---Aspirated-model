@@ -1,5 +1,5 @@
 %% make a spectrogram, and do inverse fourier transform to get the audio file
-function sig = geneAsp2(pitch,dur,volumn)
+function sig = geneAsp2_2(pitch,dur,volumn,randtemp)
     Fs = 65536;
     N = round(dur * Fs);
     time = (0:N-1) / Fs;
@@ -27,9 +27,10 @@ function sig = geneAsp2(pitch,dur,volumn)
     e = 1;
     sampnum = length(spec)/d;
     for i = 1:sampnum
-        p = round(rand * (length(spec)-1))+1;
+        p = randtemp(i);
         if pitchidx ~= p
             spec_abs(p) = pitchval * b / ( ( abs ( x(p) - pitch ) ^ e ) * a + b )/m;
+%             spec_abs(p) = pitchval/m/100;
         end
     end
     spec_abs = volumn * spec_abs / norm(spec_abs);
@@ -42,13 +43,12 @@ function sig = geneAsp2(pitch,dur,volumn)
         l = round(length(sig)*((1-dur)/2)); r = round(length(sig)*((1-dur)/2+dur));
         sig = sig(l:r);
     elseif(dur > 1)
-%         l = round(length(sig)/4)+1; r = round(length(sig)*3/4);
-%         sig = sig(l:r);
-%         sig = repmat(sig,1,dur*2);
-        sig = repmat(sig,1,dur);
+        sig = repmat(sig,1,floor(dur));
+        if(dur-floor(dur)>0)
+            sig = [sig, sig_(1:end*(dur-floor(dur)))];
     end
-    sig = sig .* hanning(length(sig))';
+        sig = sig .* hanning(length(sig))';
     
-    plot(x,spec_abs);
-    axis([0, 2000,0, pitchval]);
+%     plot(x,spec_abs);
+%     axis([0, 2000,0, pitchval]);
 end

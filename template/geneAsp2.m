@@ -24,7 +24,7 @@ function sig = geneAsp2(pitch,dur,volumn)
     b = 100;
     d = 10;
     m = 5;
-    e = 1;
+    e = 1.25;
     sampnum = length(spec)/d;
     for i = 1:sampnum
         p = round(rand * (length(spec)-1))+1;
@@ -42,13 +42,12 @@ function sig = geneAsp2(pitch,dur,volumn)
         l = round(length(sig)*((1-dur)/2)); r = round(length(sig)*((1-dur)/2+dur));
         sig = sig(l:r);
     elseif(dur > 1)
-%         l = round(length(sig)/4)+1; r = round(length(sig)*3/4);
-%         sig = sig(l:r);
-%         sig = repmat(sig,1,dur*2);
-        sig = repmat(sig,1,dur);
+        sig = repmat(sig,1,floor(dur));
+        if(dur-floor(dur)>0)
+            sig = [sig, sig_(1:end*(dur-floor(dur)))];
     end
-    sig = sig .* hanning(length(sig))';
+        sig = sig .* hanning(length(sig))';
     
-    plot(x,spec_abs);
-    axis([0, 2000,0, pitchval]);
+%     plot(x,spec_abs);
+%     axis([0, 2000,0, pitchval]);
 end
